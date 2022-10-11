@@ -1,6 +1,7 @@
 package com.example.androidapplicationbasics
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidapplicationbasics.databinding.ActivityMainBinding
@@ -18,16 +19,16 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.btnSubmit.setOnClickListener() {
-            submit()
-        }
+        binding.btnSubmit.setOnClickListener(onClick)
+        binding.btnReset.setOnClickListener(onClick)
+        binding.btnUndo.setOnClickListener(onClick)
+    }
 
-        binding.btnReset.setOnClickListener {
-            reset()
-        }
-
-        binding.btnUndo.setOnClickListener {
-            undo()
+    private val onClick = fun(v: View) {
+        when (v.id) {
+            R.id.btnReset -> reset()
+            R.id.btnSubmit -> submit()
+            R.id.btnUndo -> undo()
         }
     }
 
