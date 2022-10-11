@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Android Application Basics</string>
+    <string name="text_view_text">%1$d. %2$s</string>
+    <string name="edit_text_hint">Enter text</string>
+    <string name="button_submit_caption">Submit</string>
+    <string name="button_reset_caption">Reset</string>
+    <string name="button_undo_caption">Undo</string>
+    <string name="msg_enter_text">Please, enter some text</string>
+    <string name="msg_submit_text">Submit value: %1$s</string>
+    <string name="msg_reset_text">Reset successfully</string>
+    <string name="msg_undo_no_elements_text">No elements to undo</string>
+    <string name="msg_undo_undo_text">Undo text: %1$s</string>
+</resources>
