@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private val onClick = fun(v: View) {
         when (v.id) {
-            R.id.btnReset -> reset()
             R.id.btnSubmit -> submit()
+            R.id.btnReset -> reset()
             R.id.btnUndo -> undo()
         }
     }
@@ -65,9 +65,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        binding.textView.text = ""
         val lastElement = stack.removeLast()
         binding.editText.setText(lastElement)
+
+        when (val peek = stack.lastOrNull()) {
+            null -> binding.textView.text = ""
+            else -> binding.textView.text = getString(
+                R.string.text_view_text, stack.size, peek
+            )
+        }
+
         showToastMessage(getString(R.string.msg_undo_undo_text, lastElement))
     }
 
