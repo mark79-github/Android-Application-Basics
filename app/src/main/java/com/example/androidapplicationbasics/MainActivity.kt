@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text = text
         binding.editText.setText("")
         stack.addLast(enteredText)
+        binding.btnUndo.isEnabled = true
+        binding.btnReset.isEnabled = true
 
         showToastMessage(getString(R.string.msg_submit_text, enteredText))
     }
@@ -55,21 +57,26 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text = ""
         binding.editText.setText("")
 
+        binding.btnReset.isEnabled = false
+        binding.btnUndo.isEnabled = false
         showToastMessage(getString(R.string.msg_reset_text))
     }
 
     private fun undo() {
         if (stack.isEmpty()) {
-            binding.editText.setText("")
-            showToastMessage(getString(R.string.msg_undo_no_elements_text))
             return
         }
 
         val lastElement = stack.removeLast()
         binding.editText.setText(lastElement)
+        binding.editText.setSelection(binding.editText.text.length)
 
         when (val peek = stack.lastOrNull()) {
-            null -> binding.textView.text = ""
+            null -> {
+                binding.textView.text = ""
+                binding.btnReset.isEnabled = false
+                binding.btnUndo.isEnabled = false
+            }
             else -> binding.textView.text = getString(
                 R.string.text_view_text, stack.size, peek
             )
