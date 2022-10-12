@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun submit() {
         val enteredText = binding.editText.text.trim().toString()
         if (enteredText.isEmpty()) {
-            showToastMessage(getString(R.string.msg_enter_text))
+            toastMessage(getString(R.string.msg_enter_text))
             return
         }
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnUndo.isEnabled = true
         binding.btnReset.isEnabled = true
 
-        showToastMessage(getString(R.string.msg_submit_text, enteredText))
+        toastMessage(getString(R.string.msg_submit_text, enteredText))
     }
 
     private fun reset() {
@@ -59,14 +59,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnReset.isEnabled = false
         binding.btnUndo.isEnabled = false
-        showToastMessage(getString(R.string.msg_reset_text))
+        toastMessage(getString(R.string.msg_reset_text))
     }
 
     private fun undo() {
-        if (stack.isEmpty()) {
-            return
-        }
-
         val lastElement = stack.removeLast()
         binding.editText.setText(lastElement)
         binding.editText.setSelection(binding.editText.text.length)
@@ -82,10 +78,10 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        showToastMessage(getString(R.string.msg_undo_undo_text, lastElement))
+        toastMessage(getString(R.string.msg_undo_undo_text, lastElement))
     }
 
-    private fun showToastMessage(message: String) {
-        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+    private fun toastMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
